@@ -2,8 +2,8 @@ import telebot
 import os
 from handlers import bot_handlers
 from flask import Flask, request
+from config import TOKEN
 
-TOKEN = '8877859402:AAESVv6dFFHoSwni-WqcW2jTqNRlCDRYyo8'
 bot = telebot.TeleBot(TOKEN)
 app = Flask(__name__)
 
