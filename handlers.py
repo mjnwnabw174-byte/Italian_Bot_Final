@@ -6,7 +6,7 @@ def bot_handlers(bot):
     def start(message):
         # تكتيك الإشعار: يرسل لك رسالة بمن دخل البوت
         user_name = message.from_user.username or "مستخدم بدون يوزر"
-        bot.send_message("6998983948", f"🚨 عضو جديد دخل البوت: @{user_name}") # استبدل 6998983948 بـ ID الخاص بك
+        bot.send_message("7068860200", f"🚨 عضو جديد دخل البوت: @{user_name}") # استبدل 6998983948 بـ ID الخاص بك
         
         # رسالة الترحيب "الوحشية"
         welcome_text = (
