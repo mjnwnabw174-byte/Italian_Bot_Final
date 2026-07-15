@@ -1,14 +1,14 @@
 import telebot
+from config import MY_ID
 
 def bot_handlers(bot):
     
     @bot.message_handler(commands=['start'])
     def start(message):
-        # تكتيك الإشعار: يرسل لك رسالة بمن دخل البوت
-        user_name = message.from_user.username or "مستخدم بدون يوزر"
-        bot.send_message("7068860200", f"🚨 عضو جديد دخل البوت: @{user_name}") # استبدل 6998983948 بـ ID الخاص بك
+        user_name = message.from_user.username or "مستخدم"
+        # إشعار دخول عضو جديد
+        bot.send_message(MY_ID, f"🚨 عضو جديد دخل البوت: @{user_name}")
         
-        # رسالة الترحيب "الوحشية"
         welcome_text = (
             "🔥 أهلاً بك في جيش التفاعل! 🔥\n\n"
             "أنت الآن في المكان الصحيح لتصبح الأفضل.\n"
@@ -26,4 +26,3 @@ def bot_handlers(bot):
     def callback(call):
         if call.data == 'exchange':
             bot.send_message(call.message.chat.id, "انتظر... يتم تجهيز رابط الشخص التالي في الدور.")
-
