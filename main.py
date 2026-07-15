@@ -1,11 +1,12 @@
 import telebot
-from handlers import bot_handlers
 from config import TOKEN
+import handlers  # استيراد ملف الأزرار
+import logic     # استيراد ملف المنطق
 
 bot = telebot.TeleBot(TOKEN)
 
-# إعداد المعالجات
-bot_handlers(bot)
+# تفعيل الأزرار والمنطق
+handlers.bot_handlers(bot) 
 
-print("الوحش يعمل الآن...")
+print("الوحش يعمل بكامل طاقته...")
 bot.infinity_polling()
