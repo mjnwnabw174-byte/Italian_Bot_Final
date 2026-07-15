@@ -1,12 +1,16 @@
 import telebot
 from config import TOKEN
-import handlers  # استيراد ملف الأزرار
-import logic     # استيراد ملف المنطق
+import handlers
+import logic
 
+# تشغيل البوت
 bot = telebot.TeleBot(TOKEN)
 
-# تفعيل الأزرار والمنطق
-handlers.bot_handlers(bot) 
+# تفعيل الأزرار والمنطق (شغلك الحقيقي)
+handlers.bot_handlers(bot)
 
-print("الوحش يعمل بكامل طاقته...")
-bot.infinity_polling()
+# الضربة القاضية: مسح التخبيص القديم والتشغيل
+if __name__ == "__main__":
+    print("الوحش يعمل الآن وبكامل قوته...")
+    bot.delete_webhook()
+    bot.infinity_polling()
