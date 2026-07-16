@@ -1,13 +1,17 @@
 import telebot
 import logic
+from config import MY_ID  # تأكد أن MY_ID موجودة في ملف config.py
 
 def bot_handlers(bot):
     
     @bot.message_handler(commands=['start'])
     def start(message):
         user = message.from_user
-        # تسجيل الدخول في المخ (Google Sheets)
+        # تسجيل دخول في الشيتس (سجل الحضور)
         logic.log_to_sheets(user.first_name, user.username or "لا يوجد", "انضم للبوت")
+        
+        # إشعار واحد لك أنت (الرسالة الواحدة اللي طلبتها)
+        bot.send_message(MY_ID, f"🟢 انضمام جديد:\nالاسم: {user.first_name}\nاليوزر: @{user.username or 'لا يوجد'}\nالآي دي: {user.id}")
         
         welcome_text = (
             "🔥 أهلاً بك يا وحش في جيش إيطالي! 🔥\n\n"
@@ -24,10 +28,8 @@ def bot_handlers(bot):
     def callback(call):
         if call.data == 'add_link':
             bot.send_message(call.message.chat.id, "أرسل رابط فيديو التيك توك الخاص بك الآن، وسأحفظه في الطابور!")
-            # هنا ستضيف لاحقاً منطق حفظ الرابط في logic.py
             
         elif call.data == 'exchange':
-            # التحقق من وجود رابط (سوف نربطه لاحقاً بـ logic.check_user)
             bot.send_message(call.message.chat.id, 
                 "🚀 خطة التفاعل السريع:\n"
                 "1. ادخل الرابط اللي بيظهر لك.\n"
