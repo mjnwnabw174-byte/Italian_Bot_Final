@@ -1,28 +1,35 @@
 import telebot
-from config import MY_ID
+import logic
 
 def bot_handlers(bot):
     
     @bot.message_handler(commands=['start'])
     def start(message):
-        user_name = message.from_user.username or "مستخدم"
-        # إشعار دخول عضو جديد
-        bot.send_message(MY_ID, f"🚨 عضو جديد دخل البوت: @{user_name}")
+        user = message.from_user
+        # تسجيل الدخول في المخ (Google Sheets)
+        logic.log_to_sheets(user.first_name, user.username or "لا يوجد", "انضم للبوت")
         
         welcome_text = (
-            "🔥 أهلاً بك في جيش التفاعل! 🔥\n\n"
-            "أنت الآن في المكان الصحيح لتصبح الأفضل.\n"
-            "قاعدتنا بسيطة: تفاعل بصدق، يأتيك التفاعل من الجميع.\n"
-            "إذا تفاعلت مع 10، نضمن لك تفاعل 100!\n"
-            "نحن لا نلعب، نحن نصنع الترند.\n"
-            "تفاعل، شارك، وكن القائد!\n"
-            "الآن، اختر من الأزرار وابدأ التكتيك."
+            "🔥 أهلاً بك يا وحش في جيش إيطالي! 🔥\n\n"
+            "القاعدة الذهبية: تفاعل مع 3 فيديوهات (لايك + تعليق + إكسبلور)، وبتشوف التفاعل كيف يطير!\n"
+            "تذكر: التفاعل بصدق يعني ترند حقيقي.\n"
+            "اضغط إضافة رابطك أولاً، ثم ابدأ التبادل!"
         )
         markup = telebot.types.InlineKeyboardMarkup()
+        markup.add(telebot.types.InlineKeyboardButton("➕ إضافة رابط حسابي", callback_data='add_link'))
         markup.add(telebot.types.InlineKeyboardButton("🤝 تبادل (تفاعل كامل)", callback_data='exchange'))
         bot.send_message(message.chat.id, welcome_text, reply_markup=markup)
 
     @bot.callback_query_handler(func=lambda call: True)
     def callback(call):
-        if call.data == 'exchange':
-            bot.send_message(call.message.chat.id, "انتظر... يتم تجهيز رابط الشخص التالي في الدور.")
+        if call.data == 'add_link':
+            bot.send_message(call.message.chat.id, "أرسل رابط فيديو التيك توك الخاص بك الآن، وسأحفظه في الطابور!")
+            # هنا ستضيف لاحقاً منطق حفظ الرابط في logic.py
+            
+        elif call.data == 'exchange':
+            # التحقق من وجود رابط (سوف نربطه لاحقاً بـ logic.check_user)
+            bot.send_message(call.message.chat.id, 
+                "🚀 خطة التفاعل السريع:\n"
+                "1. ادخل الرابط اللي بيظهر لك.\n"
+                "2. تفاعل مع أول 3 فيديوهات (لايك + تعليق + إكسبلور).\n"
+                "3. ارجع هنا واضغط 'تم التفاعل' عشان نثبت حقك!")
