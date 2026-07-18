@@ -1,3 +1,4 @@
-TOKEN = '8877859402:AAFIrW1qF4BMGVC9BzuMsicza2pA-Exm-DE'
-WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbywjm4v3ExOL1ynBonQk1hYVzCzoeMUKvPSRTLXoi6cRBYUncUEsNgZ-NZEqPEPMwBu/exec'
-MY_ID = '7068860200'
+TOKEN = "8877859402:AAFNvm7i1Z6QdKXM1gtz3PzTd6qipKHfWSgا"
+
+WEB_APP_URL = "https://script.google.com/macros/s/..."
+MY_ID = "7068860200"
